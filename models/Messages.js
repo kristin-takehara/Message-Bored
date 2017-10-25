@@ -11,11 +11,11 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: {type: DataTypes.DATE, allowNull: false},
     author_id: {type: DataTypes.INTEGER, allowNull: false, onUpdate: "CASCADE",
       references: {
-        model: message,
+        model: user,
         key: 'id',
         defferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
       }
-    }
+    },
     topic_id: {type: DataTypes.INTEGER, allowNull: false, onUpdate: "CASCADE",
       references: {
         model: topic,
