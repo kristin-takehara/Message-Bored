@@ -37,8 +37,12 @@ router.post('/', (req, res) => {
   const name = req.body.name;
   const createdAt = req.body.createdAt;
   const updatedAt = req.body.updatedAt;
-  //Enter logic
 
-// <<<---pick up HERE
+  //<<<---- Enter logic
+
+  return Users.create( { usersId: req.user.id, name: name, createdAt: createdAt, updatedAt: updatedAt });
 
 });
+
+
+module.exports = router;
