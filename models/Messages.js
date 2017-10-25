@@ -1,9 +1,28 @@
 //jshint esversion: 6
-//MODELS - MESSAGES
-module.exports = function(sequelize, DataTypes) {
-  const messages = sequelize.define('messages', {
-    id: DataTypes.INTEGER,
 
+//MODELS - MESSAGES
+
+module.exports = function(sequelize, DataTypes) {
+  const message = sequelize.define('message', {
+    id: {type: DataTypes.INTEGER, allowNull: false, devalutValue: true, primaryKey: true},
+
+    body: {type: DataTypes.TEXT, allowNull: false},
+    createdAt: {type: DataTypes.DATE, allowNull: false},
+    updatedAt: {type: DataTypes.DATE, allowNull: false},
+    author_id: {type: DataTypes.INTEGER, allowNull: false, onUpdate: "CASCADE",
+      references: {
+        model: message,
+        key: 'id',
+        defferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
+      }
+    }
+    topic_id: {type: DataTypes.INTEGER, allowNull: false, onUpdate: "CASCADE",
+      references: {
+        model: topic,
+        key: 'id',
+        defferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
+      }
+    }
   });
   return messages;
 };
