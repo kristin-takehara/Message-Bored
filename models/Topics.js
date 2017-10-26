@@ -8,14 +8,25 @@ module.exports = function(sequelize, DataTypes) {
     name: {type: DataTypes.STRING, allowNull: false, unique: true},
     createdAt: {type: DataTypes.DATE, allowNull: false},
     updatedAt: {type: DataTypes.DATE, allowNull: false},
-    created_By: {type: DataTypes.INTEGER, allowNull: false, onUpdate: "CASCADE",
-      references: {
-        model: user,
-        key: 'id',
-        defferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
-      }
-    }
   });
+
+  topic.associate = function(models) {
+    topic.belongsTo(models.user, {
+      onUpdate: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
+    // created_By: {type: DataTypes.INTEGER, allowNull: false, onUpdate: "CASCADE",
+    //   references: {
+    //     model: users,
+    //     key: 'id',
+    //     defferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
+    //   }
+    // }
+
 
   return topic;
 };
