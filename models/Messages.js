@@ -4,8 +4,6 @@
 
 module.exports = function(sequelize, DataTypes) {
   const message = sequelize.define('message', {
-    id: {type: DataTypes.INTEGER, allowNull: false, devalutValue: true, primaryKey: true},
-
     body: {type: DataTypes.TEXT, allowNull: false},
     createdAt: {type: DataTypes.DATE, allowNull: false},
     updatedAt: {type: DataTypes.DATE, allowNull: false},

@@ -13,23 +13,23 @@ router.get('/', (req, res) => {
   .then(users => {
     let locals = { users : users };
     return res.render('./index', locals);
+  })
+  .catch((err) => {
+    let message = { message : 'Unable to find all users. Please try your request again' };
+    res.render('./error', message);
   });
-  // .catch((err) => {
-  //   let message = { message : 'Unable to find all users. Please try your request again' };
-  //   res.render('./error', message);
-  // });
 });
 
-//GET/api/users/:id  :  respond with user and all messages authorized by this user
-// router.get('/:id', (req, res) => {
-//   const usersId = req.params.id;
+// GET/api/users/:id  :  respond with user and all messages authorized by this user
+router.get('/:id', (req, res) => {
+  const usersId = req.params.id;
 
-//   return Users.findAll({
-//     where: {
-//       id: usersId
-//     }
-//   });
-// });
+  return Users.findAll({
+    where: {
+      id: usersId
+    }
+  });
+});
 
 // //POST/api/users  :  create and respond with new user
 // router.post('/', (req, res) => {

@@ -1,18 +1,18 @@
-// //jshint esversion: 6
+//jshint esversion: 6
 
-// // ROUTES - MESSAGES
+// ROUTES - MESSAGES
 
-// const express = require('express');
-// const router = express.Router;
-// const db = require('../../models');
-// const Messages = db.messages;
+const express = require('express');
+const router = express.Router;
+const db = require('../../models');
+const Messages = db.messages;
 
-// //GET/api/messages/lates  :  respond with
-// //- the latest 10 messages
-// //- including the name of the topic
-// //- and the author's name
+//GET/api/messages/lates  :  respond with
+//- the latest 10 messages
+//- including the name of the topic
+//- and the author's name
 // router.get('/', (req, res) => {
-//   return Messages.findTen({
+//   return Messages.findOne({
 //     attributes: ['id', ['name', 'created_By']]
 //   })
 //   .then(messages => {
@@ -41,8 +41,8 @@
 
 // });
 
-// //GET/api/messages/by-topic/:topic_id  :  respond with all messages that belong to the topic by :topic_id, including the topic name, author's name, ordered by: createdAT ASC
+//GET/api/messages/by-topic/:topic_id  :  respond with all messages that belong to the topic by :topic_id, including the topic name, author's name, ordered by: createdAT ASC
 
 
 
-// module.exports = router;
+module.exports = router;

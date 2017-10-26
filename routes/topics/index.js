@@ -1,13 +1,13 @@
-// //jshint esversion: 6
+//jshint esversion: 6
 
-// // ROUTES -- TOPICS
+// ROUTES -- TOPICS
 
-// const express = require('express');
-// const router = express.Router();
-// const db = require('../../models');
-// const Topics = db.topics;
+const express = require('express');
+const router = express.Router();
+const db = require('../../models');
+const Topics = db.topics;
 
-// //GET/api/topics  :  respond with all topics including the creator's name
+//GET/api/topics  :  respond with all topics including the creator's name
 // router.get('/', (req, res) => {
 //   return Topics.findAll()
 //   .then(topics => {
@@ -49,4 +49,4 @@
 //   });
 // });
 
-// module.exports = router;
+module.exports = router;

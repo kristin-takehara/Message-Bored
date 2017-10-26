@@ -18,19 +18,32 @@ const Users = db.users;
 const Messages = db.messages;
 const Topics = db.topics;
 
-
 const routes = require('./routes');
 
 const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use(express.static('public'));
 
-// app.use('/api', routes);
+app.use('/api', routes);
+
+app.get('/api/users', (req, res) => {
+  res.json([
+  {
+    name: 'Hermione Granger'
+  },
+  {
+    name: 'Harry Potter',
+  },
+  {
+    name: 'Ronald Weasley'
+  }
+  ]);
+});
 
 app.listen(PORT, () => {
-  // db.sequelize.sync({force:true});
+  db.sequelize.sync({force:true});
   console.log(`Server listening on port: ${PORT}`);
 });
