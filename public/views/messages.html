@@ -1,1 +1,19 @@
-messages.html
+<div>
+  <input type="text" ng-model="MessageSearch" placeholder="Search by Message">
+  <button ng-click="getMessage()">Get Message</button>
+</div>
+
+<ul>
+  <!-- takes in the data from the controller -->
+  <li ng-repeat="message in MessagesService.message |
+  filter: messageSearch |
+  orderBy: 'createAt'
+  ">
+    <h4>{{ message.body }}</h4>
+  </li>
+</ul>
+
+<form>
+  <input type="text" ng-model="newMessage.body" placeholder="New Message">
+  <button ng-click="addMessage()">Add New Message</button>
+</form>
