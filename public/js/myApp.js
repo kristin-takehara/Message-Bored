@@ -16,8 +16,16 @@ var app = angular.module('myApp')
     templateUrl: '/views/users.html',
     controller: 'UsersController'
   })
+  .when('/topics', {
+    templateUrl: '/views/topics.html',
+    controller: 'TopicsController'
+  })
+  .when('/messages', {
+    templateUrl: '/views/messages.html',
+    controller: 'MessagesController'
+  })
   .otherwise({
-    template: '<h1><center>Uh Oh...</center></h1>'
+    template: '<h1><center>...Uh Oh...</center></h1>'
   });
 
   // this gets rid of the need for #!
