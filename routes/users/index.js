@@ -7,13 +7,14 @@ const router = express.Router();
 const db = require('../../models');
 const User = db.user;
 
-console.log('User', User);
-
 //GET/api/users  :  respond with all users
 router.get('/', (req, res) => {
   return User.findAll()
   .then(user => {
     res.json(user);
+  })
+  .catch((err) => {
+    console.log('Users not found', err);
   });
 });
 
