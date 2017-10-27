@@ -29,20 +29,6 @@ app.use(express.static('public'));
 
 app.use('/api', routes);
 
-app.get('/api/users', (req, res) => {
-  res.json([
-  {
-    name: 'Hermione Granger'
-  },
-  {
-    name: 'Harry Potter',
-  },
-  {
-    name: 'Ronald Weasley'
-  }
-  ]);
-});
-
 app.listen(PORT, () => {
   db.sequelize.sync({force:true});
   console.log(`Server listening on port: ${PORT}`);

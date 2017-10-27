@@ -5,20 +5,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../models');
-const Topics = db.topics;
+const Topic = db.topic;
 
 //GET/api/topics  :  respond with all topics including the creator's name
-// router.get('/', (req, res) => {
-//   return Topics.findAll()
-//   .then(topics => {
-//     let locals = { topics : topics, name : name };
-//     return res.render('./index', locals);
-//   })
-//   .catch((err) => {
-//     let message = { message: 'Unable to locate all topics with their creator'};
-//     res.render('./error', message);
-//   });
-// });
+router.get('/', (req, res) => {
+  return Topic.findAll()
+  .then(topic => {
+    res.json(topic);
+  });
+});
 
 // //POST/api/topics  :  create and respond with a new topic
 // route.post('/', (req, res) => {

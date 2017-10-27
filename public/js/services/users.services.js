@@ -48,4 +48,5 @@ angular
     var updateUrl = url + '/' + id;
     $http.put(updateUrl, user);
   };
+
 }]);

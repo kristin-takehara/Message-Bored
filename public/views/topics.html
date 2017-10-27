@@ -1,1 +1,20 @@
-topics.html
+<div>
+  <input type="text" ng-model="topicSearch" placeholder="Search by Topic">
+  <button ng-click="getTopic()">Get Topic</button>
+</div>
+
+<ul>
+  <!-- takes in the data from the controller -->
+  <li ng-repeat="topic in
+  TopicsService.topics |
+  filter:topicSearch |
+  orderBy: 'name'
+  ">
+      <h4>{{ topic.name }}</h4>
+  </li>
+</ul>
+
+<form>
+  <input type="text" ng-model="newTopic.name" placeholder="Topic Title">
+  <button ng-click="addTopic()">Add New Topic</button>
+</form>

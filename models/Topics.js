@@ -13,19 +13,17 @@ module.exports = function(sequelize, DataTypes) {
     topic.belongsTo(models.user, {
       onUpdate: "CASCADE",
       foreignKey: {
+        name: "created_by",
+        allowNull: false
+      }
+    });
+    topic.hasMany(models.message, {
+      onUpdate: "CASCADE",
+      foreignKey: {
+        name: "topic_id",
         allowNull: false
       }
     });
   };
-
-    // created_By: {type: DataTypes.INTEGER, allowNull: false, onUpdate: "CASCADE",
-    //   references: {
-    //     model: users,
-    //     key: 'id',
-    //     defferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
-    //   }
-    // }
-
-
   return topic;
 };
