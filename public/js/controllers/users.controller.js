@@ -15,4 +15,5 @@ angular
     UsersService.addUser($scope.newUser);
     $scope.newUser.name = '';
   };
+
 }]);
