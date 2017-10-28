@@ -1,11 +1,11 @@
-<script>
-  document.write('<a href="' + document.referrer + '"><Back</a>')
-</script>
-
 <div id="login">
-  <form action="/login" method="POST">
+  <h4 id="loginText"><center>..::Welcome back::..<br>Please Login.</center></h4>
+  <form action="/login" method="POST"><center>
     <input type="text" name="username" placeholder="username">
+    <br>
     <input type="password" name="password" placeholder="password">
-    <input type="submit"></input>
-  </form>
+    <br>
+    <br>
+    <button ng-click="login()">Login</button>
+  </center></form>
 </div>

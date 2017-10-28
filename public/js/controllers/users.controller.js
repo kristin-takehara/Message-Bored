@@ -3,25 +3,26 @@
 
 angular
 .module('myApp')
-.controller('UsersController', ['$scope', 'UsersService', '$routeParams', function($scope, UsersService, $rootParams) {
-  $scope.userSearch = '';
+.controller('UsersController', ['UsersService', '$scope', '$routeParams', function(UsersService, $scope, $rootParams) {
+
   $scope.UsersService = UsersService;
 
 
-  $scope.user = UsersService.user;
-
-  $scope.getUser = function(data) {
-    UsersService.getUser($routeParams.userId);
-    $scope.getUser.id = '';
-  };
-
-  $scope.newUser = {
-    name: ''
-  };
-
-  $scope.addUser = function(e) {
-    UsersService.addUser($scope.newUser);
-    $scope.newUser.name = '';
-  };
+  UsersService.getUsers();
 
 }]);
+
+
+  // $scope.getUser = function(data) {
+  //   UsersService.getUser($routeParams.userId);
+  //   $scope.getUser.id = '';
+  // };
+
+  // $scope.newUser = {
+  //   name: ''
+  // };
+
+  // $scope.addUser = function(e) {
+  //   UsersService.addUser($scope.newUser);
+  //   $scope.newUser.name = '';
+  // };

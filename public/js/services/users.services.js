@@ -4,12 +4,13 @@
 
 angular
 .module('myApp')
-.service('UsersService', ['$http', function($http) {
+.service('UsersService', ['$http', '$routeParams', '$location', '$window', function($http) {
   var url = '/api/users';
   var self = this;
 
   //collection of users
   this.users = [];
+  this.user = [];
 
   //initialization
   $http.get(url)
@@ -19,10 +20,21 @@ angular
 
   //get methods
   this.getUsers = function() {
-    return users;
+    $http.get(usersUrl)
+    .then(function(response) {
+      self.users = response.data;
+    });
+    return self.users;
   };
+
   this.getUser = function(index) {
-    return users[index];
+    var apiUrl = 'api/user/' + parseInt($routeParams.param1);
+
+    $http.get(apiUrl)
+    .then(function(response) {
+      self.user = response.data;
+    });
+    return self.user;
   };
 
   //create method

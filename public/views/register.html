@@ -1,13 +1,11 @@
-<script>
-  document.write('<a href="' + document.referrer + '">< Back</a>');
-</script>
-
-<h2 id="regText">Please enter a username and password to register</h2>
-<br>
 <div id="register">
-  <form action="/register" method="POST">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <input type="submit"></input>
-  </form>
+  <h4 id="regText"><center>Please enter a username and password to register:</center></h4>
+  <form action="/register" method="POST"><center>
+    <input type="text" name="username" ng-model="newUser.username" placeholder="username">
+    <br>
+    <input type="password" name="password" ng-model="newUser.password" placeholder="password">
+    <br>
+    <br>
+    <button ng-click="addUser()">Register</button>
+  </center></form>
 </div>
