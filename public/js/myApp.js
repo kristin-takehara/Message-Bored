@@ -20,9 +20,9 @@ var app = angular.module('myApp')
     templateUrl: '/views/login.html',
     controller: 'LoginController'
   })
-  .when('.logout', {
+  .when('/logout', {
     templateUrl: '/views/logout.html',
-    controller: 'LogoutController'
+    controller: 'UserLoginController'
   })
   .when('/users', {
     templateUrl: '/views/users.html',
@@ -35,6 +35,14 @@ var app = angular.module('myApp')
   .when('/topics', {
     templateUrl: '/views/topics.html',
     controller: 'TopicsController'
+  })
+  .when('/topics/:id', {
+    templateUrl: '/views/topics.html',
+    controller: 'TopicsController'
+  })
+  .when('/latest', {
+    templateUrl: '/views/messages/latest',
+    controller: 'LatestController'
   })
   .when('/messages', {
     templateUrl: '/views/messages.html',

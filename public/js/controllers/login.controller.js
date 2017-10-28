@@ -2,11 +2,13 @@ angular
 .module('myApp')
 .controller('LoginController', ['UsersService', '$scope', function(UsersService, $scope) {
 
-  $scope.UsersService = UsersService;
+  $scope.userInfo = {
+    username: '',
+    password: ''
+  };
 
-  UsersService.loginUser();
-
-  $scope.user = UsersService.user;
-
+  $scope.login = function(e) {
+    UsersService.loginUser($scope.userInfo);
+  };
 
 }]);
