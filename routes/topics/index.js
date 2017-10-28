@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
 // //POST/api/topics  :  create and respond with a new topic
 router.post('/', (req, res) => {
-  console.log('req.topic', req.topic);
+  console.log('req.name', req.name);
   const topicId = req.body.id;
   const name = req.body.name;
   const createdAt = req.body.createdAt;
@@ -32,13 +32,13 @@ router.post('/', (req, res) => {
 // //PUT/api/topics/:id  :  update and respond with the updated topic
 router.put('/:id', (req, res) => {
   let newTopic = req.body;
-  let topicsId = req.params.id;
+  let topicId = req.params.id;
 
-  return Topics.findById(topicsId)
-  .then(topics => {
-    if(req.topics.id === topics.id)
+  return Topic.findById(topicId)
+  .then(topic => {
+    if(req.topic.id === topic.id)
       return Topic.update(newInfo, {
-        where: [{id: topicsId}]
+        where: [{id: topicId}]
       });
     //can redirect if desired here (remove above semi-colon)
   });

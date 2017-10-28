@@ -3,13 +3,14 @@
 
 angular
 .module('myApp')
-.controller('TopicsController', ['$scope', 'TopicsService', function($scope, TopicsService) {
+.controller('TopicsController', ['$scope', '$routeParams', '$locationProvider', 'TopicsService', function($scope, $routeParams, $locationProvider,TopicsService) {
   $scope.topicSearch = '';
   $scope.TopicsService = TopicsService;
 
   $scope.newTopic = {
     name: ''
   };
+
 
   $scope.addTopic = function(e) {
     TopicsService.addTopic($scope.newTopic);
