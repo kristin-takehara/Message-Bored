@@ -18,10 +18,17 @@
   },
   "homepage": "https://github.com/kristin-takehara/Message-Bored#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "connect": "^3.6.5",
+    "connect-redis": "^3.3.2",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
+    "redis": "^2.8.0",
     "sequelize": "^4.17.2"
   }
 }
