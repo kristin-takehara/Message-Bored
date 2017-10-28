@@ -25,6 +25,12 @@ router.get('/:id', (req, res) => {
     where: {
       id: userId
     }
+    .then(user => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.log('User not found. Please try your request again', err);
+    })
   });
 });
 
