@@ -73,6 +73,7 @@ angular
     });
   };
 
+//----------LogIN USER-----------------
   //logIn user
   this.loginUser = function(userInfo) {
     var user = {
@@ -90,6 +91,17 @@ angular
     });
   };
 
+//----------LogOUT USER----------------
+  //logOut user (switch loggedIn to false)
+  this.logoutUser = function() {
+    $http.get('/logout')
+    .then(function(response) {
+      localStorage.setItem('/loggedIn', false);
+      $location.path('/');
+      $window.location.reload();
+    });
+  };
+
   //to update the url
   this.update = function(id, user) {
     var updateUrl = url + '/' + id;
@@ -99,15 +111,6 @@ angular
 }]);
 
 //----------------------------------------
-
-//   this.logOut = function(){
-//     $http.get('/logout')
-//     .then(function (response){
-//       localStorage.setItem('loggedIn', false);
-//       $location.path('/');
-//       $window.location.reload();
-//     });
-//   };
 
 //   this.getLoggedIn = function(){
 //     var loginStatus = localStorage.getItem('loggedIn');
