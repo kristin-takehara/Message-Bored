@@ -91,6 +91,14 @@ angular
     });
   };
 
+  //verify a user as logged in
+  //return the saved local storage data based on key
+  this.getLoggedIn = function() {
+    var loggedInStatus = localStorage.getItem('loggedIn');
+    var loggedIn = { loggedIn: loggedInStatus };
+    return loggedIn;
+  };
+
 //----------LogOUT USER----------------
   //logOut user (switch loggedIn to false)
   this.logoutUser = function() {
