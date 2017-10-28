@@ -3,24 +3,22 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
+const PORT = process.env.PORT || 3000;
 //----------AUTHENTICATION----------
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
-const redis = require('connect-redis')(session);
+// const redis = require('connect-redis')(session);
 //----------------------------------
+const path = require('path');
+const routes = require('./routes');
 
 const db = require('./models');
 const User = db.user;
 const Message = db.message;
 const Topic = db.topic;
-
-const routes = require('./routes');
-
-const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -28,9 +26,10 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 //----------------------------------
 
+
 //----------PASSPORT - AUTHENTICATION
 app.use(session({
-  store: new redis(),
+  // store: new redis(),
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false
@@ -58,7 +57,7 @@ passport.deserializeUser((user, done) => {
   });
 });
 
-passport.use(new LocalStrategy(function(name, password, done){
+passport.use(new LocalStrategy(function(username, password, done){
   User.findOne({ where: {username: username} })
   .then(user => {
     if(user === null) {
@@ -68,54 +67,37 @@ passport.use(new LocalStrategy(function(name, password, done){
       .then(res => {
         console.log(res);
         if(res){
-          return done(null, user); //<<<---limit user access
+          return done(null, user);
+        }else{ //limit user access
+          return done(null, false, { message: 'Bad username or password. Please try again'});
         }
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
       });
     }
-  })
-  .catch((err) => {
-    console.log('Error: ', err);
   });
 }));
 
-//----------NAVIGATION MENU----------
-app.get('/register', (req, res) => {
-  res.render('./register');
-});
 
-app.get('/login', (req, res) => {
-  res.render('./login');
-});
-
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login'
-}));
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.sendStatus(200);
-});
-
-app.post('/register', (req, res) => {
+app.post('/api/users', (req, res) => {
   bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(req.body.password, salt, function(err, hash) {
       User.create({
         username: req.body.username,
         password: hash
       })
-      .then((user) => {
-        console.log('user', user);
-        res.redirect('/');
+      .then((newUser) => {
+        return res.json(newUser);
       })
       .catch((err) => {
-        let message = { message: 'Sorry, please try your username and password again'};
-        console.log('Error: ', message);
+        console.log('Error: ', err);
       });
     });
   });
 });
 
+//verify user authentication
 function isAuthenticated(req, res, next) {
   if(req.isAuthenticated()) {
     next();
@@ -124,47 +106,103 @@ function isAuthenticated(req, res, next) {
   }
 }
 
-/////API ROUTES/////////////////
+
+//----------NAVIGATION MENU----------
+
+//LogIN an authenticated user
+app.post('/login', passport.authenticate('local', function(req, res) {
+  let user = req.user;
+  res.json(req.user);
+}));
+
+//LogOUT a user
+app.get('/logout', (req, res) => {
+  let user = req.user;
+  req.logout(); //fire logout request
+  res.sendStatus(200); //fire status ok response
+  res.json(user);
+});
+
+app.get('/register', (req, res) => {
+  res.render('./register');
+});
+
+app.get('/login', (req, res) => {
+  res.render('./login');
+});
+
+//----------API ROUTES---------------
 app.use('/api', routes);
-// USERS
-app.get('/api/users', (req, res) => {
-  console.log('got all users');
+
+//----------VIEWS--------------------
+app.get('*', (req, res) => {
+  res.sendFile('/index.html', { root: path.join(__dirname, '/public') });
 });
 
-app.get('/api/users/:id', (req, res) => {
-  console.log('got user and its messages ');
-});
-
-app.post('/api/users', (req, res) => {
-  console.log('new user created');
-});
-// TOPICS
-app.get('/api/topics', (req, res) => {
-  console.log('got all topics including creator');
-});//<<<--- does this need to be a joined path?
-
-app.post('/api/topics', (req, res) => {
-  console.log('new topic created');
-});
-
-app.put('/api/topics/:id', (req, res) => {
-  console.log('topic updated');
-});
-// MESSAGES
-app.post('/api/messages', (req, res) => {
-  console.log('new message created');
-});
-
-app.get('/api/messages/latest', (req, res) => {
-  console.log('got most recent 10 messages');
-});
-
-app.get('api/messages/by-topic/:topic_id', (req, res) => {
-  console.log('got all topic messages');
-});
 ///////////////////////////////////////
 
 app.listen(PORT, () => {
   db.sequelize.sync({force:true});
   console.log(`Server listening on port: ${PORT}`);
 });
+
+
+
+
+
+// app.post('/register', (req, res) => {
+//   bcrypt.genSalt(saltRounds, function(err, salt) {
+//     bcrypt.hash(req.body.password, salt, function(err, hash) {
+//       User.create({
+//         username: req.body.username,
+//         password: hash
+//       })
+//       .then((user) => {
+//         console.log('user', user);
+//         res.redirect('/');
+//       })
+//       .catch((err) => {
+//         let message = { message: 'Sorry, please try your username and password again'};
+//         console.log('Error: ', message);
+//       });
+//     });
+//   });
+// });
+
+
+// // USERS
+// app.get('/api/users', (req, res) => {
+//   console.log('got all users');
+// });
+
+// app.get('/api/users/:id', (req, res) => {
+//   console.log('got user and its messages ');
+// });
+
+// app.post('/api/users', (req, res) => {
+//   console.log('new user created');
+// });
+// // TOPICS
+// app.get('/api/topics', (req, res) => {
+//   console.log('got all topics including creator');
+// });//<<<--- does this need to be a joined path?
+
+// app.post('/api/topics', (req, res) => {
+//   console.log('new topic created');
+// });
+
+// app.put('/api/topics/:id', (req, res) => {
+//   console.log('topic updated');
+// });
+// // MESSAGES
+// app.post('/api/messages', (req, res) => {
+//   console.log('new message created');
+// });
+
+// app.get('/api/messages/latest', (req, res) => {
+//   console.log('got most recent 10 messages');
+// });
+
+// app.get('api/messages/by-topic/:topic_id', (req, res) => {
+//   console.log('got all topic messages');
+// });
