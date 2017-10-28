@@ -1,6 +1,6 @@
 angular
 .module('myApp')
-.controller('LoginController', ['UsersService', '$scope', function(UsersService, scope) {
+.controller('LoginController', ['UsersService', '$scope', function(UsersService, $scope) {
 
   $scope.UsersService = UsersService;
 

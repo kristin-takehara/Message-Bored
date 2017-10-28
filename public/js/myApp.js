@@ -17,7 +17,12 @@ var app = angular.module('myApp')
     controller: 'RegisterController'
   })
   .when('/login', {
-    templateUrl: '/views/login.html'
+    templateUrl: '/views/login.html',
+    controller: 'LoginController'
+  })
+  .when('.logout', {
+    templateUrl: '/views/logout.html',
+    controller: 'LogoutController'
   })
   .when('/users', {
     templateUrl: '/views/users.html',
