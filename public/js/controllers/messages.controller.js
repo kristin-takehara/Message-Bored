@@ -7,9 +7,9 @@ angular
   $scope.messageSearch = '';
   $scope.MessagesService = MessagesService;
 
-  // $scope.newMessage = {
-  //   body: ''
-  // };
+  $scope.newMessage = {
+    body: ''
+  };
 
   $scope.addMessage = function(e) {
     MessagesService.addMessage($scope.newMessage)

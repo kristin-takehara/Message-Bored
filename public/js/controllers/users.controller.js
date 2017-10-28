@@ -3,9 +3,17 @@
 
 angular
 .module('myApp')
-.controller('UsersController', ['$scope', 'UsersService', function($scope, UsersService) {
+.controller('UsersController', ['$scope', 'UsersService', '$routeParams', function($scope, UsersService, $rootParams) {
   $scope.userSearch = '';
   $scope.UsersService = UsersService;
+
+
+  $scope.user = UsersService.user;
+
+  $scope.getUser = function(data) {
+    UsersService.getUser($routeParams.userId);
+    $scope.getUser.id = '';
+  };
 
   $scope.newUser = {
     name: ''

@@ -11,7 +11,6 @@ angular
     name: ''
   };
 
-
   $scope.addTopic = function(e) {
     TopicsService.addTopic($scope.newTopic);
     $scope.newTopic.name = '';

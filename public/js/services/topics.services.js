@@ -21,6 +21,7 @@ angular
   this.getTopics = function() {
     return topics;
   };
+
   this.getTopic = function(index) {
     return topics[index];
   };

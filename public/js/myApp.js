@@ -16,6 +16,10 @@ var app = angular.module('myApp')
     templateUrl: '/views/users.html',
     controller: 'UsersController'
   })
+  .when('/users/:id', {
+    templateUrl: '/views/user.html',
+    controller: 'UsersController'
+  })
   .when('/topics', {
     templateUrl: '/views/topics.html',
     controller: 'TopicsController'
