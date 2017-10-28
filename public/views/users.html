@@ -1,19 +1,25 @@
+<h1>Message Bored User Family</h1>
+<br>
+
 <div>
   <input type="text" ng-model="userSearch" placeholder="Search for User">
-  <button ng-click="getUser()">Get User</button>
+  <button ng-click="getUser()">Find User</button>
 </div>
+<br>
+<br>
 
 <ul>
   <!-- takes in the data from the controller -->
   <li ng-repeat="user in
   UsersService.users |
-  filter:userSearch |
+  filter: userSearch |
   orderBy: 'name'
   ">
-      <h4>{{ user.name }}</h4>
+    <a href="/users/{{ user.id }}"><h4>{{ user.name }}</h4></a>
   </li>
 </ul>
 
+<!-- ADD/CREATE A NEW USER -->
 <form>
   <input type="text" ng-model="newUser.name" placeholder="Name">
   <button ng-click="addUser()">Add User</button>
