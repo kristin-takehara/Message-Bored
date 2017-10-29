@@ -1,0 +1,57 @@
+html {
+  background-color: black;
+  background-image: url("/assets/Library-ToDo-Desk-Notepad-idlewild_1_0_LibraryDeskPad.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: center fixed;
+  background-size: cover;
+  font-family: 'Josefin Sans', sans-serif;
+  color: #36b99a;
+  text-decoration: none;
+}
+
+body {
+  cursor: url("/assets/pencil-icon-16621.png"), auto;
+}
+
+h1 {
+  font-family: 'ABeeZee', sans-serif;
+}
+
+h2 {
+  font-family: 'ABeeZee', sans-serif;
+}
+
+h3 {
+  font-family: 'ABeeZee', sans-serif;
+}
+
+h4 {
+  font-family: 'ABeeZee', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 100%;
+  color:  #ffc0cb;
+  cursor: auto;
+}
+
+#nav {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+#nav a:hover {
+  color: lightgreen;
+}
+
+
+
+.quickLinks a:hover {
+  cursor: auto;
+  color: lightgreen;
+}
