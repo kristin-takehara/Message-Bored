@@ -31,12 +31,12 @@ router.get('/:id', (req, res) => {
 });
 
 // //POST/api/users  :  create and respond with new user
-router.post('/', (req, res) => {
-  let username = req.body.name;
-  return User.create( { username: name})
-  .then(newUser => {
-    return res.json(newUser);
-  });
-});
+// router.post('/', (req, res) => {
+//   let username = req.body.name;
+//   return User.create( { username: username})
+//   .then(newUser => {
+//     return res.json(newUser);
+//   });
+// });
 
 module.exports = router;

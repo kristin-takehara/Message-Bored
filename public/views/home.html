@@ -1,8 +1,12 @@
 <div id="nav">
-    <a ng-href="/">Home</a>
-    <a ng-href="/login">Login</a>
-    <a ng-href="/register">Register</a>
-    <a ng-href="/logout">Logout</a>
+  <div ng-controller="UserLoginController" id="navMenu">
+    <ul>
+      <li><a ng-href="/">Home</a></li>
+      <li ng-if="loginObj.loggedIn === 'false'"><a ng-href="/register">Register</a></li>
+      <li ng-if="loginObj.loggedIn === 'false'"><a ng-href="/login">Login</a></li>
+      <li ng-if="loginObj.loggedIn === 'true'"><a ng-href="/logout">Logout</a></li>
+    </ul>
+  </div>
 </div>
 
     <h1><center>.:welcome to the bor3d:.</center></h1>
@@ -13,6 +17,7 @@
     <section class="quickLinks">
       <ul>
         <li><a ng-href="/users">Users</a></li>
+        <br>
         <li><a ng-href="/latest">10 Most Recent Topics</a></li>
       </ul>
     </section>
